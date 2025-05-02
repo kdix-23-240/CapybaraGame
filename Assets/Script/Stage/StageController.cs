@@ -8,9 +8,10 @@ public class StageController : MonoBehaviour
     [SerializeField] List<GameObject> stages;
     [SerializeField] GameObject initialStage;
     [SerializeField] float speed = 5.0f;
-    private const int stageWidth = 20;
+    private const float stageWidth = 20f;
     private const int initialStageCount = 5;
     private List<GameObject> stageListInGame = new List<GameObject>();
+    public float StageSpeed{get => speed;set => speed = value;}
 
 
     void Start()
@@ -20,7 +21,7 @@ public class StageController : MonoBehaviour
         for(int i = 0; i < initialStageCount; i++)
         {
             int index = Random.Range(0, stages.Count);
-            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth, -4, 0), Quaternion.identity);
+            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth - 0.001f, -4, 0), Quaternion.identity);
             stageListInGame.Add(stage);
         }
     }

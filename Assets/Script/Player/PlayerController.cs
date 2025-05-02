@@ -7,11 +7,15 @@ public class PlayerController : MonoBehaviour
     private int jumpCount = 0;
     [SerializeField] private float jumpPower = 5.0f;
     private int life;
+    private bool alive;
 
+    public bool Alive{get => alive;}
+    public int Life{get => life;}
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         life = 3;
+        alive = true;
     }
 
     
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("岩に当たった");
             if(life <= 0)
             {
+                alive = false;
                 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
                 #else
