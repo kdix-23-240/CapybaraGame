@@ -73,20 +73,19 @@ public class StageController : MonoBehaviour
 
     private void ChangeSpeedState()
     {
-        if (createdStateCount > 5)
-        {
-            StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.Fast;
-            Debug.Log("ステージのスピードが速くなった");
-        }
-        if (createdStateCount > 10)
-        {
-            StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.VeryFast;
-            Debug.Log("ステージのスピードが非常に速くなった");
-        }
-        if (createdStateCount > 15)
+        if (createdStateCount > 16)
         {
             StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.Fastest;
-            Debug.Log("ステージのスピードが最速になった");
+            Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
+        }else if (createdStateCount > 12)
+        {
+            StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.VeryFast;
+            Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
+        }
+        else if (createdStateCount > 8)
+        {
+            StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.Fast;
+            Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
         }
     }
 }
