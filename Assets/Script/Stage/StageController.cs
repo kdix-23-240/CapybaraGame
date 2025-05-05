@@ -22,8 +22,8 @@ public class StageController : MonoBehaviour
     {
         speed = speedNomal;
         stageListInGame.Add(initialStage);
-        
-        for(int i = 0; i < initialStageCount; i++)
+
+        for (int i = 0; i < initialStageCount; i++)
         {
             int index = Random.Range(0, stages.Count);
             GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth, -5, 0), Quaternion.identity);
@@ -34,18 +34,26 @@ public class StageController : MonoBehaviour
 
     void Update()
     {
-        ChangeSpeedState();
-        AdjustStageSpeed();
-        for(int i = 0; i < stageListInGame.Count; i++)
+        if (GameStateEnum._currentGameState == GameStateEnum.GameState.Game)
+        {
+            ChangeSpeedState();
+            AdjustStageSpeed();
+            MoveStage();
+        }
+    }
+
+    private void MoveStage()
+    {
+        for (int i = 0; i < stageListInGame.Count; i++)
         {
             stageListInGame[i].transform.position += Vector3.left * speed * Time.deltaTime;
 
-            if(stageListInGame[i].transform.position.x < stageWidth * -2)
+            if (stageListInGame[i].transform.position.x < stageWidth * -2)
             {
                 Destroy(stageListInGame[i]);
                 stageListInGame.RemoveAt(i);
                 int index = Random.Range(0, stages.Count);
-                GameObject stage = Instantiate(stages[index], new  Vector3((stageListInGame.Count -1) * stageWidth, -5, 0),  Quaternion.identity);
+                GameObject stage = Instantiate(stages[index], new Vector3((stageListInGame.Count - 1) * stageWidth, -5, 0), Quaternion.identity);
                 stageListInGame.Add(stage);
                 createdStateCount++;
             }
@@ -77,7 +85,8 @@ public class StageController : MonoBehaviour
         {
             StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.Fastest;
             Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
-        }else if (createdStateCount > 12)
+        }
+        else if (createdStateCount > 12)
         {
             StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.VeryFast;
             Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
