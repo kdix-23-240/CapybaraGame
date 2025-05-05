@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private const float LongPushTime = 0.17f;
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private float strongJumpPower = 10.0f;
+    [SerializeField] private GameObject lifeIcon;
 
     void Awake()
     {
@@ -60,6 +61,11 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Damage"))
         {
             Const.life--;
+            // lifeIconの子オブジェクトを一つ削除
+            if (Const.life > 0)
+            {
+                Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
+            }
             Debug.Log("岩に当たった");
             if (Const.life <= 0)
             {

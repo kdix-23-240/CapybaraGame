@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 802806529775393111}
   - component: {fileID: 955716719913199580}
-  - component: {fileID: 2810119120913765146}
   - component: {fileID: 4347772689195731304}
+  - component: {fileID: 2810119120913765146}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -62,19 +62,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2810119120913765146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7312934931195288635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2553f34767250417884221142a9290fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpPower: 10
 --- !u!58 &4347772689195731304
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -109,8 +96,23 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.2, y: 0.7}
-  m_Radius: 1.8
+  m_Offset: {x: -0.2, y: 0}
+  m_Radius: 1.2
+--- !u!114 &2810119120913765146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312934931195288635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2553f34767250417884221142a9290fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpPower: 9
+  strongJumpPower: 12
+  lifeIcon: {fileID: 0}
 --- !u!1 &8461864553872705678
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +124,7 @@ GameObject:
   - component: {fileID: 1798486541106489541}
   - component: {fileID: 8552823345295770852}
   m_Layer: 0
-  m_Name: DogRun
+  m_Name: Capybara
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 8461864553872705678}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.11, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
