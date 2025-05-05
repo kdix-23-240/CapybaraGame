@@ -663,6 +663,7 @@ MonoBehaviour:
   startPanel: {fileID: 5990421267782966032}
   resultPanel: {fileID: 7602433333583496028}
   scoreText: {fileID: 7602433333583496027}
+  jumpButton: {fileID: 1653017314}
 --- !u!4 &958496459
 Transform:
   m_ObjectHideFlags: 0

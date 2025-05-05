@@ -7,6 +7,7 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private GameObject startPanel;// スタート画面のUI
     [SerializeField] private GameObject resultPanel;// リザルト画面のUI
     [SerializeField] private Text scoreText;// リザルト画面のスコアを表示するUI
+    [SerializeField] private Button jumpButton;// ジャンプボタンのUI
 
     void Start()
     {
@@ -25,17 +26,20 @@ public class GameSystem : MonoBehaviour
         if(GameStateEnum._currentGameState == GameStateEnum.GameState.Start)
         {
             resultPanel.SetActive(false);
+            jumpButton.interactable = false;
             startPanel.SetActive(true);
         }
         else if(GameStateEnum._currentGameState == GameStateEnum.GameState.Game)
         {
             startPanel.SetActive(false);
             resultPanel.SetActive(false);
+            jumpButton.interactable = true;
             gameTime += Time.deltaTime;
         }
         else if(GameStateEnum._currentGameState == GameStateEnum.GameState.Result)
         {
             startPanel.SetActive(false);
+            jumpButton.interactable = false;
             resultPanel.SetActive(true);
             scoreText.text = "すこあ: " + ((int)(gameTime * 10)).ToString();
         }
