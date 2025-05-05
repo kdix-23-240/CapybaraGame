@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
 
+/// <summary>
+/// 背景の動きの制御を行うクラス
+/// webサイトから拾ってきたので理解はしてない
+/// </summary>
 [RequireComponent(typeof(Image))]
 public class BackGroundMover : MonoBehaviour
 {

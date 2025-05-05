@@ -3,10 +3,10 @@ using UnityEngine.UI;
 
 public class GameSystem : MonoBehaviour
 {
-    private float gameTime;
-    [SerializeField] private GameObject startPanel;
-    [SerializeField] private GameObject resultPanel;
-    [SerializeField] private Text scoreText;
+    private float gameTime;// ゲーム時間を計測する変数
+    [SerializeField] private GameObject startPanel;// スタート画面のUI
+    [SerializeField] private GameObject resultPanel;// リザルト画面のUI
+    [SerializeField] private Text scoreText;// リザルト画面のスコアを表示するUI
 
     void Start()
     {
@@ -16,6 +16,10 @@ public class GameSystem : MonoBehaviour
         GameStateEnum._currentGameState = GameStateEnum.GameState.Start;
     }
 
+    /// <summary>
+    /// ゲームの状態を更新する
+    /// ゲームの状態に応じて、UIを切り替える
+    /// </summary>
     void Update()
     {
         if(GameStateEnum._currentGameState == GameStateEnum.GameState.Start)

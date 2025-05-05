@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
     void Update()
     {
         if(GameStateEnum._currentGameState == GameStateEnum.GameState.Start)
@@ -28,6 +27,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 短押しアクション
+    /// 小さく飛ぶ
+    /// </summary>
     public void ShortPushed()
     {
         if(jumpCount >= 1)
@@ -40,6 +43,10 @@ public class PlayerController : MonoBehaviour
         jumpCount++;
     }
 
+    /// <summary>
+    /// 長押しアクション
+    /// 大きく飛ぶ
+    /// </summary>
     public void LongPushed()
     {
         if (jumpCount >= 1)
@@ -52,18 +59,29 @@ public class PlayerController : MonoBehaviour
         jumpCount++;
     }
 
+    /// <summary>
+    /// 初期化
+    /// </summary>
     private void Reset()
     {
         Const.life = 3;
         jumpCount = 0;
     }
 
+    /// <summary>
+    /// ゲームオーバー処理
+    /// </summary>
     private void GameOver()
     {
         Debug.Log("GameOver");
         GameStateEnum._currentGameState = GameStateEnum.GameState.Result;
     }
 
+    /// <summary>
+    /// 衝突判定
+    /// ステージに衝突したらジャンプカウントをリセット
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Stage"))
@@ -72,6 +90,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 衝突判定
+    /// 岩に衝突したらライフを減らす
+    /// ライフが0になったらゲームオーバー
+    /// ライフアイコンを一つ削除
+    /// 岩はすり抜けるようにした
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Damage"))

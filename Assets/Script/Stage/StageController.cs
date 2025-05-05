@@ -79,6 +79,11 @@ public class StageController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ステージの速度状態を変更する
+    /// ステージの生成数に応じて速度状態を変更する
+    /// ステージの速度が変わるタイミングはかなりテキトーなので、調整が必要
+    /// </summary>
     private void ChangeSpeedState()
     {
         if (createdStateCount > 16)
