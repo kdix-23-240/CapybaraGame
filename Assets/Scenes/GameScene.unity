@@ -497,10 +497,10 @@ MonoBehaviour:
   - {fileID: 2262252465314655337, guid: 71953d049f12e4a29b7ca5157deb3c3f, type: 3}
   - {fileID: 8009553377457354128, guid: e7f3325f75a024a34aaade1a70905a69, type: 3}
   initialStage: {fileID: 326039121}
-  speedNomal: 5
-  speedFast: 10
-  speedVeryFast: 15
-  speedFastest: 20
+  speedNomal: 4
+  speedFast: 5.5
+  speedVeryFast: 7
+  speedFastest: 8.5
 --- !u!1 &1667232834
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,7 +589,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73afcd5b4f1604b749090dcb81b671cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_offsetSpeed: {x: 0.1, y: 0}
+  m_offsetSpeedNormal: 0.1
+  m_offsetSpeedFast: 0.2
+  m_offsetSpeedVeryFast: 0.3
+  m_offsetSpeedFastest: 0.4
 --- !u!1001 &4560877788001388035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -735,6 +738,6 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 323043671}
-  - {fileID: 1181479094}
   - {fileID: 7124062102673282327}
+  - {fileID: 1181479094}
   - {fileID: 4560877788001388035}
