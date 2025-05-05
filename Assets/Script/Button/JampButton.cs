@@ -10,18 +10,21 @@ public class JampButton : MonoBehaviour
 
     void Update()
     {
-        if(isPushed)
+        if (GameStateEnum._currentGameState == GameStateEnum.GameState.Game)
         {
-            frameCounter += Time.deltaTime;
-            if (frameCounter > longPushTime)
+            if (isPushed)
             {
-                player.GetComponent<PlayerController>().LongPushed();
-                frameCounter = 0;
-                isPushed = false;
+                frameCounter += Time.deltaTime;
+                if (frameCounter > longPushTime)
+                {
+                    player.GetComponent<PlayerController>().LongPushed();
+                    frameCounter = 0;
+                    isPushed = false;
+                }
             }
         }
     }
-    
+
     public void OnDown()
     {
         Debug.Log("OnDown");
@@ -30,7 +33,7 @@ public class JampButton : MonoBehaviour
 
     public void OnUp()
     {
-        Debug.Log("OnUp"+frameCounter);
+        Debug.Log("OnUp" + frameCounter);
         Jump();
         isPushed = false;
     }

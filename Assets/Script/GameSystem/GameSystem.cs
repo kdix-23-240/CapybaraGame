@@ -33,6 +33,7 @@ public class GameSystem : MonoBehaviour
         {
             startPanel.SetActive(false);
             resultPanel.SetActive(true);
+            scoreText.text = "すこあ: " + ((int)(gameTime * 10)).ToString();
         }
     }
 }

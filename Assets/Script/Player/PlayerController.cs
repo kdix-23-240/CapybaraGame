@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(GameStateEnum._currentGameState == GameStateEnum.GameState.Start)
+        {
+            Reset();
+        }
         if (gameObject.transform.position.x < -8)
         {
             GameOver();
@@ -46,6 +50,12 @@ public class PlayerController : MonoBehaviour
         /* 長押しアクション */
         rb.AddForce(Vector2.up * strongJumpPower, ForceMode2D.Impulse);
         jumpCount++;
+    }
+
+    private void Reset()
+    {
+        Const.life = 3;
+        jumpCount = 0;
     }
 
     private void GameOver()
