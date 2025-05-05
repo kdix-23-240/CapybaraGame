@@ -51,17 +51,29 @@ public class PlayerController : MonoBehaviour
         jumpCount++;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void GameOver()
     {
-        if (other.gameObject.CompareTag("Stage"))
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
+#else
+        Application.Quit();//ゲームプレイ終了
+#endif
+        Debug.Log("Game Over!!!!!");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Stage"))
         {
             jumpCount = 0;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.CompareTag("Damage"))
         {
             Const.life--;
-            rb.AddForce(Vector2.up * jumpPower * 0.5f, ForceMode2D.Impulse);
             // lifeIconの子オブジェクトを一つ削除
             if (Const.life > 0)
             {
@@ -73,15 +85,5 @@ public class PlayerController : MonoBehaviour
                 GameOver();
             }
         }
-    }
-
-    private void GameOver()
-    {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
-#else
-        Application.Quit();//ゲームプレイ終了
-#endif
-        Debug.Log("Game Over!!!!!");
     }
 }

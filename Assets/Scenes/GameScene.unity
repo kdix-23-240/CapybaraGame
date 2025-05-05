@@ -652,6 +652,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7394878009908448249, guid: db26ed65400584ca89c21f2c9235a8bd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8816975107564759406, guid: db26ed65400584ca89c21f2c9235a8bd, type: 3}
       propertyPath: m_Name
       value: Stage0
@@ -679,7 +683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 802806529775393111, guid: 05731cd5f82574141b95a1d79dac7c77, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 802806529775393111, guid: 05731cd5f82574141b95a1d79dac7c77, type: 3}
       propertyPath: m_LocalRotation.w
@@ -713,6 +717,10 @@ PrefabInstance:
       propertyPath: lifeIcon
       value: 
       objectReference: {fileID: 1510085837}
+    - target: {fileID: 4347772689195731304, guid: 05731cd5f82574141b95a1d79dac7c77, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7312934931195288635, guid: 05731cd5f82574141b95a1d79dac7c77, type: 3}
       propertyPath: m_Name
       value: Player
