@@ -10,13 +10,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private float strongJumpPower = 10.0f;
     [SerializeField] private GameObject lifeIcon;
+    private bool isHit = false;// ダメージを受けたかどうか
     private SpriteRenderer spriteRenderer;
     [SerializeField] private float damageTime = 10f;
     [SerializeField] private float flashTime = 0.1f;
     private int life;
     private bool alive;
     private Color color;
-    
+
     public bool Alive { get => alive; }
     public int Life { get => life; }
     void Awake()
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
         Const.life = 3;
         jumpCount = 0;
         spriteRenderer.color = color;
-        
+
     }
 
     /// <summary>
@@ -116,21 +117,25 @@ public class PlayerController : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Damage"))
+        // ダメージを受けてすぐは無敵
+        if (!isHit)
         {
-            Const.life--;
-            gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
-            // lifeIconの子オブジェクトを一つ削除
-            if (Const.life >= 0)
+            if (other.gameObject.CompareTag("Damage"))
             {
-                Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
-            }
-            Debug.Log("岩に当たった");
-            StartCoroutine(DamageCoroutine());
+                Const.life--;
+                gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
+                // lifeIconの子オブジェクトを一つ削除
+                if (Const.life >= 0)
+                {
+                    Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
+                }
+                Debug.Log("岩に当たった");
+                StartCoroutine(DamageCoroutine());
 
-            if (Const.life <= 0)
-            {
-                GameOver();
+                if (Const.life <= 0)
+                {
+                    GameOver();
+                }
             }
         }
     }
@@ -140,6 +145,7 @@ public class PlayerController : MonoBehaviour
     //colorのa値を変えて透明不透明を切り替える
     private IEnumerator DamageCoroutine()
     {
+        isHit = true;
         Debug.Log("コルーチン");
         for (int i = 0; i < damageTime; i++)
         {
@@ -151,5 +157,6 @@ public class PlayerController : MonoBehaviour
         }
         spriteRenderer.color = color;
         gameObject.layer = LayerMask.NameToLayer("Default");
+        isHit = false;
     }
 }
