@@ -28,7 +28,16 @@ public class BackGroundMover : MonoBehaviour
 
 	private void Update()
 	{
-		if (Time.timeScale == 0f)
+        if(GameStateEnum._currentGameState == GameStateEnum.GameState.Game)
+        {
+            ChangeSpeedState();
+            BGMove();
+        }
+	}
+
+    private void BGMove()
+    {
+        if (Time.timeScale == 0f)
 		{
 			return;
 		}
@@ -38,7 +47,7 @@ public class BackGroundMover : MonoBehaviour
 		var y = Mathf.Repeat(Time.time * m_offsetSpeed.y, k_maxLength);
 		var offset = new Vector2(x, y);
 		m_copiedMaterial.SetTextureOffset(k_propName, offset);
-	}
+    }
 
     private void ChangeSpeedState()
     {

@@ -50,12 +50,8 @@ public class PlayerController : MonoBehaviour
 
     private void GameOver()
     {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
-#else
-        Application.Quit();//ゲームプレイ終了
-#endif
-        Debug.Log("Game Over!!!!!");
+        Debug.Log("GameOver");
+        GameStateEnum._currentGameState = GameStateEnum.GameState.Result;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
