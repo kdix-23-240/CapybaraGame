@@ -18,34 +18,31 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        if (jumpCount >= 1) return;
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Invoke(nameof(LongPushed), LongPushTime);
-        }
-        else if (Input.GetKeyUp(KeyCode.Space) && IsInvoking(nameof(LongPushed)))
-        {
-            CancelInvoke(nameof(LongPushed));
-            ShortPushed();
-        }
-
         if (gameObject.transform.position.x < -8)
         {
             GameOver();
         }
     }
 
-    void ShortPushed()
+    public void ShortPushed()
     {
+        if(jumpCount >= 1)
+        {
+            return;
+        }
+
         /* 短押しアクション */
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         jumpCount++;
     }
 
-    void LongPushed()
+    public void LongPushed()
     {
+        if (jumpCount >= 1)
+        {
+            return;
+        }
+
         /* 長押しアクション */
         rb.AddForce(Vector2.up * strongJumpPower, ForceMode2D.Impulse);
         jumpCount++;
