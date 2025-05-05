@@ -19,6 +19,6 @@ public class UIController : MonoBehaviour
 
     public void SetLifeText(int life)
     {
-        lifeText.text = "Life" + life;
+        lifeText.text = "Life:" + life;
     }
 }

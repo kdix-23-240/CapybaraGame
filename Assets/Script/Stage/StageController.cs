@@ -16,17 +16,32 @@ public class StageController : MonoBehaviour
 
     void Start()
     {
+        SetUpStage();
+    }
+
+    void Update()
+    {
+        MoveStage();
+    }
+
+    //最初にランダムに5つステージを作成し、生成する
+    //ゲームに生成されたと同時にstageListInGameに追加する
+    private void SetUpStage()
+    {
         stageListInGame.Add(initialStage);
         
         for(int i = 0; i < initialStageCount; i++)
         {
             int index = Random.Range(0, stages.Count);
-            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth - 0.001f, -4, 0), Quaternion.identity);
+            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth, -4, 0), Quaternion.identity);
             stageListInGame.Add(stage);
         }
     }
 
-    void Update()
+    //ステージをspeed移動させる
+    //画面の外にstageWidth二個分移動したら削除されて新しく別のステージが生成される
+    //生成されたと同時にリストに追加する
+    private void MoveStage()
     {
         for(int i = 0; i < stageListInGame.Count; i++)
         {
@@ -42,6 +57,5 @@ public class StageController : MonoBehaviour
             }
         }
     }
-
 
 }

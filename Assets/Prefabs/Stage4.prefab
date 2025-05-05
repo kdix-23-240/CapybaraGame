@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9085054225054756553}
   - component: {fileID: 8993199047020981296}
   - component: {fileID: 454404721571820641}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rock2
   m_TagString: Damage
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 5290366174168743782}
   - component: {fileID: 8869746276464407942}
   - component: {fileID: 5689685686567051796}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rock3
   m_TagString: Damage
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 1222801247539127143}
   - component: {fileID: 2682244353888605203}
   - component: {fileID: 833462152702728599}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Rock1
   m_TagString: Damage
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 20, y: 3}
+  m_Size: {x: 20.5, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -502,10 +502,10 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 10.24, y: 10.24}
-    newSize: {x: 20, y: 3}
+    newSize: {x: 20.5, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 20, y: 3}
+  m_Size: {x: 20, y: 2.8}
   m_EdgeRadius: 0
