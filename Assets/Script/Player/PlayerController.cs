@@ -8,12 +8,10 @@ public class PlayerController : MonoBehaviour
     private const float LongPushTime = 0.17f;
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private float strongJumpPower = 10.0f;
-    private int life;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        life = 3;
     }
 
 
@@ -30,6 +28,11 @@ public class PlayerController : MonoBehaviour
         {
             CancelInvoke(nameof(LongPushed));
             ShortPushed();
+        }
+
+        if (gameObject.transform.position.x < -8)
+        {
+            GameOver();
         }
     }
 
@@ -56,17 +59,22 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Damage"))
         {
-            life--;
+            Const.life--;
             Debug.Log("岩に当たった");
-            if (life <= 0)
+            if (Const.life <= 0)
             {
+                GameOver();
+            }
+        }
+    }
+
+    private void GameOver()
+    {
 #if UNITY_EDITOR
                     UnityEditor.EditorApplication.isPlaying = false;//ゲームプレイ終了
 #else
-                Application.Quit();//ゲームプレイ終了
+        Application.Quit();//ゲームプレイ終了
 #endif
-                Debug.Log("Game Over!!!!!");
-            }
-        }
+        Debug.Log("Game Over!!!!!");
     }
 }
