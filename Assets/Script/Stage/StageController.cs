@@ -14,23 +14,15 @@ public class StageController : MonoBehaviour
     [SerializeField] float speedFastest = 20.0f;
     private const int stageWidth = 20;
     private const int initialStageCount = 5;
-    private List<GameObject> stageListInGame = new List<GameObject>();
+    private List<GameObject> stageListInGame;
     private int createdStateCount = 0;
 
 
     void Start()
     {
-        speed = speedNomal;
-        stageListInGame.Add(initialStage);
-
-        for (int i = 0; i < initialStageCount; i++)
-        {
-            int index = Random.Range(0, stages.Count);
-            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth, -5, 0), Quaternion.identity);
-            stageListInGame.Add(stage);
-            createdStateCount++;
-        }
+        
     }
+
 
     void Update()
     {
@@ -38,26 +30,32 @@ public class StageController : MonoBehaviour
         {
             ChangeSpeedState();
             AdjustStageSpeed();
-            MoveStage();
+            if (stageListInGame != null) 
+            {
+                MoveStage();
+            }
         }
     }
 
     private void MoveStage()
     {
-        for (int i = 0; i < stageListInGame.Count; i++)
-        {
-            stageListInGame[i].transform.position += Vector3.left * speed * Time.deltaTime;
-
-            if (stageListInGame[i].transform.position.x < stageWidth * -2)
+        
+            for (int i = stageListInGame.Count - 1; i >= 0; i--)
             {
-                Destroy(stageListInGame[i]);
-                stageListInGame.RemoveAt(i);
-                int index = Random.Range(0, stages.Count);
-                GameObject stage = Instantiate(stages[index], new Vector3((stageListInGame.Count - 1) * stageWidth, -5, 0), Quaternion.identity);
-                stageListInGame.Add(stage);
-                createdStateCount++;
+                if (stageListInGame[i] == null) continue;
+                stageListInGame[i].transform.position += Vector3.left * speed * Time.deltaTime;
+
+                if (stageListInGame[i].transform.position.x < stageWidth * -2)
+                {
+                    Destroy(stageListInGame[i]);
+                    stageListInGame.RemoveAt(i);
+                    int index = Random.Range(0, stages.Count);
+                    GameObject stage = Instantiate(stages[index], new Vector3((stageListInGame.Count - 1) * stageWidth, -5, 0), Quaternion.identity);
+                    stageListInGame.Add(stage);
+                    createdStateCount++;
+                }
             }
-        }
+        
     }
 
     private void AdjustStageSpeed()
@@ -102,4 +100,44 @@ public class StageController : MonoBehaviour
             Debug.Log("速度: " + StageSpeedStateEnum._currentStageSpeedState);
         }
     }
+
+    public void Reset()
+    {
+        if(stageListInGame != null)
+        {
+            for (int i = stageListInGame.Count - 1; i >= 0; i--)
+            {
+                if (stageListInGame[i] != null)
+                {
+                    Destroy(stageListInGame[i]);
+                    stageListInGame.RemoveAt(i);
+                }
+            }
+            stageListInGame.Clear();
+            
+            stageSetUp();
+        }else if(stageListInGame == null)
+        {
+            stageListInGame = new List<GameObject>();
+            stageSetUp();
+        }
+        
+    }
+
+    public void stageSetUp()
+    {   
+        StageSpeedStateEnum._currentStageSpeedState = StageSpeedStateEnum.StageSpeedState.Normal;
+        createdStateCount = 0;
+        speed = speedNomal;
+        GameObject initial = Instantiate(initialStage, new Vector3(0, -5, 0), Quaternion.identity);
+        stageListInGame.Add(initial);  
+        for (int i = 0; i < initialStageCount; i++)
+        {
+            int index = Random.Range(0, stages.Count);
+            GameObject stage = Instantiate(stages[index], new Vector3((i + 1) * stageWidth, -5, 0), Quaternion.identity);
+            stageListInGame.Add(stage);
+            createdStateCount++;
+        }
+    }
+
 }

@@ -15,13 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float flashTime = 0.1f;
     private int life;
     private bool alive;
-
+    private Color color;
+    
     public bool Alive { get => alive; }
     public int Life { get => life; }
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        color = spriteRenderer.color;
         life = 3;
         alive = true;
     }
@@ -75,8 +77,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Reset()
     {
+        Debug.Log("リセット");
         Const.life = 3;
         jumpCount = 0;
+        spriteRenderer.color = color;
+        
     }
 
     /// <summary>
@@ -114,8 +119,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Damage"))
         {
             Const.life--;
+            gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
             // lifeIconの子オブジェクトを一つ削除
-            if (Const.life > 0)
+            if (Const.life >= 0)
             {
                 Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
             }
@@ -135,8 +141,6 @@ public class PlayerController : MonoBehaviour
     private IEnumerator DamageCoroutine()
     {
         Debug.Log("コルーチン");
-        Color color = spriteRenderer.color;
-
         for (int i = 0; i < damageTime; i++)
         {
             yield return new WaitForSeconds(flashTime);
@@ -146,5 +150,6 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.color = new Color(color.r, color.g, color.b, 1.0f);
         }
         spriteRenderer.color = color;
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

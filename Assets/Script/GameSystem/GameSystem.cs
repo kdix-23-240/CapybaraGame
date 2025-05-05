@@ -8,10 +8,11 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private GameObject resultPanel;// リザルト画面のUI
     [SerializeField] private Text scoreText;// リザルト画面のスコアを表示するUI
     [SerializeField] private Button jumpButton;// ジャンプボタンのUI
+    [SerializeField] private Life life;
 
     void Start()
     {
-        gameTime = 0;
+        
         startPanel.SetActive(true);
         resultPanel.SetActive(false);
         GameStateEnum._currentGameState = GameStateEnum.GameState.Start;
@@ -28,6 +29,7 @@ public class GameSystem : MonoBehaviour
             resultPanel.SetActive(false);
             jumpButton.interactable = false;
             startPanel.SetActive(true);
+            gameTime = 0;
         }
         else if(GameStateEnum._currentGameState == GameStateEnum.GameState.Game)
         {
@@ -44,4 +46,5 @@ public class GameSystem : MonoBehaviour
             scoreText.text = "すこあ: " + ((int)(gameTime * 10)).ToString();
         }
     }
+
 }

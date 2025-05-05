@@ -9,8 +9,10 @@ public class Life : MonoBehaviour
 
     void Start()
     {
-        Reset();
+         
     }
+
+    
 
     /// <summary>
     /// ライフの初期化
@@ -18,7 +20,7 @@ public class Life : MonoBehaviour
     /// ライフの数だけアイコンを生成し、横に並べる
     /// アイコンのサイズを設定する
     /// </summary>
-    private void Reset()
+    public void Reset()
     {
         // ライフの初期化
         for (int i = 0; i < Const.life; i++)
