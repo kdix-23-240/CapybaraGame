@@ -28,7 +28,7 @@ public class Life : MonoBehaviour
             GameObject icon = Instantiate(lifeIcon, new Vector3(0, 0, 0), Quaternion.identity);
             icon.transform.SetParent(transform);
             icon.transform.localPosition = new Vector3(i * 80, 0, 0);
-            icon.transform.localScale = new Vector3(30, 30, 30);
+            icon.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 }
