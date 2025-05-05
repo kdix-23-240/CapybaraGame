@@ -10,20 +10,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 5.0f;
     [SerializeField] private float strongJumpPower = 10.0f;
     [SerializeField] private GameObject lifeIcon;
-    // private SpriteRenderer spriteRenderer;
-    // [SerializeField] private float damageTime = 10f;
-    // [SerializeField] private float flashTime = 0.1f;
-    // private int life;
-    // private bool alive;
-
-    // public bool Alive { get => alive; }
-    // public int Life { get => life; }
+    private SpriteRenderer spriteRenderer;
+    [SerializeField] private float damageTime = 10f;
+    [SerializeField] private float flashTime = 0.1f;
+    private int life;
+    private bool alive;
+    private Color color;
+    
+    public bool Alive { get => alive; }
+    public int Life { get => life; }
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // spriteRenderer = GetComponent<SpriteRenderer>();
-        // life = 3;
-        // alive = true;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        color = spriteRenderer.color;
+        life = 3;
+        alive = true;
     }
 
     void Update()
@@ -75,8 +77,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void Reset()
     {
+        Debug.Log("リセット");
         Const.life = 3;
         jumpCount = 0;
+        spriteRenderer.color = color;
+        
     }
 
     /// <summary>
@@ -114,8 +119,9 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Damage"))
         {
             Const.life--;
+            gameObject.layer = LayerMask.NameToLayer("PlayerDamage");
             // lifeIconの子オブジェクトを一つ削除
-            if (Const.life > 0)
+            if (Const.life >= 0)
             {
                 Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
             }
@@ -132,19 +138,18 @@ public class PlayerController : MonoBehaviour
     //無敵時間を作るコルーチン
     //ダメージを受けたときに実行する
     //colorのa値を変えて透明不透明を切り替える
-    // private IEnumerator DamageCoroutine()
-    // {
-    //     Debug.Log("コルーチン");
-    //     Color color = spriteRenderer.color;
+    private IEnumerator DamageCoroutine()
+    {
+        Debug.Log("コルーチン");
+        for (int i = 0; i < damageTime; i++)
+        {
+            yield return new WaitForSeconds(flashTime);
+            spriteRenderer.color = new Color(color.r, color.g, color.b, 0.0f);
 
-    //     for (int i = 0; i < damageTime; i++)
-    //     {
-    //         yield return new WaitForSeconds(flashTime);
-    //         spriteRenderer.color = new Color(color.r, color.g, color.b, 0.0f);
-
-    //         yield return new WaitForSeconds(flashTime);
-    //         spriteRenderer.color = new Color(color.r, color.g, color.b, 1.0f);
-    //     }
-    //     spriteRenderer.color = color;
-    // }
+            yield return new WaitForSeconds(flashTime);
+            spriteRenderer.color = new Color(color.r, color.g, color.b, 1.0f);
+        }
+        spriteRenderer.color = color;
+        gameObject.layer = LayerMask.NameToLayer("Default");
+    }
 }
