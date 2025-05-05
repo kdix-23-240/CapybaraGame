@@ -4,9 +4,9 @@ using UnityEngine.UI;
 public class GameSystem : MonoBehaviour
 {
     private float gameTime;
-    [SerializeField] private Text scoreText;
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject resultPanel;
+    [SerializeField] private Text scoreText;
 
     void Start()
     {
