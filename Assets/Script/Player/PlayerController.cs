@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
                 Destroy(lifeIcon.transform.GetChild(Const.life).gameObject);
             }
             Debug.Log("岩に当たった");
-            StartCoroutine(DamageCoroutine());
+            // StartCoroutine(DamageCoroutine());
 
             if (Const.life <= 0)
             {
