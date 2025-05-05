@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Damage"))
         {
             Const.life--;
+            rb.AddForce(Vector2.up * jumpPower * 0.5f, ForceMode2D.Impulse);
             // lifeIconの子オブジェクトを一つ削除
             if (Const.life > 0)
             {
